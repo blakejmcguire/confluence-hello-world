@@ -1,0 +1,49 @@
+modules:
+  macro:
+    - key: laptop-test
+      function: main
+      title: Laptop Forge test app
+      description: Does some stuff.
+  function:
+    - key: main
+      handler: index.run
+      providers:
+        auth:
+          - github
+app:
+  id: ari:cloud:ecosystem::app/c88617dd-a820-427c-92cd-d0c012fae1d2
+providers:
+  auth:
+    - key: github
+      name: GitHub
+      type: oauth2
+      scopes: 
+        - 'user'
+      clientId: Iv1.c2d14dc0e8576ced
+      remotes:
+        - github-api
+      bearerMethod: authorization-header
+      actions:
+        authorization:
+          remote: github-oauth
+          path: /login/oauth/authorize
+        exchange:
+          remote: github-oauth
+          path: /login/oauth/access_token
+        retrieveProfile:
+          remote: github-api
+          path: /user
+          resolvers:
+            id: id
+            displayName: name
+remotes:
+  - key: github-oauth
+    baseUrl: https://github.com
+  - key: github-api
+    baseUrl: https://api.github.com
+permissions:
+  external:
+    fetch:
+      backend:
+        - 'https://github.com'
+        - 'https://api.github.com'
