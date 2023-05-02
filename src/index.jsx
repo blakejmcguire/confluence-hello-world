@@ -1,5 +1,4 @@
 import ForgeUI, { render, Fragment, Text, Heading, Tabs, Tab, Table, Head, Row, Cell, Code, Macro, useState } from "@forge/ui"
-//import getProfile from './getProfile.js'
 
 const getProfile = async () => {
   const github = api.asUser().withProvider('github', 'github-api')
